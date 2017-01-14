@@ -18,5 +18,9 @@
     "type": "git",
     "url": "https://github.com/slammayjammay/node-pager"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "ansi-escapes": "^1.4.0",
+    "get-cursor-position": "^1.0.3"
+  }
 }
