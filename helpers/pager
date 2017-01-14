@@ -1,0 +1,4 @@
+#!/bin/bash
+
+text=$1
+echo "$text" | less -R
