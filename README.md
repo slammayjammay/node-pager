@@ -14,6 +14,8 @@ const pager = require('node-pager')
 
 // read file contents and print to a pager
 fs.readFile('somefile.txt', (err, data) => {
-  pager(data.toString('utf8'))
+  pager(data.toString('utf8')).then(() => {
+    console.log('pager exited')
+  })
 })
 ```
