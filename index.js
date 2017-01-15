@@ -11,7 +11,7 @@ const PAGER_COMMAND_LOC = './helpers/pager'
  * to its original position.
  *
  * @param {string} text - A string of text.
- * @return {null}
+ * @return {promise}
  */
 const pager = (text) => {
 	return new Promise((resolve) => {
