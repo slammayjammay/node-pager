@@ -3,7 +3,7 @@ const spawnSync = require('child_process').spawnSync
 const ansiEscapes = require('ansi-escapes')
 const getCursorPosition = require('get-cursor-position')
 
-const PAGER_COMMAND_LOC = './helpers/pager'
+const PAGER_COMMAND_LOC = '../helpers/pager'
 
 /**
  * Output the given text into a pager (less). First move the cursor to the top
