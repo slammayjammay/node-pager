@@ -1,7 +1,7 @@
 const join = require('path').join
 const spawnSync = require('child_process').spawnSync
 const ansiEscapes = require('ansi-escapes')
-const getCursorPosition = require('get-cursor-position')
+const getCursorPosition = require('@patrickkettner/get-cursor-position')
 
 const PAGER_COMMAND_LOC = '../helpers/pager'
 
