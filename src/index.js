@@ -21,7 +21,10 @@ const pager = (text) => {
     process.stdout.write(ansiEscapes.cursorTo(0, 0))
 
     const pagerCommand = join(__dirname, PAGER_COMMAND_LOC)
-    spawnSync(SHELL, [isWin ? '-File' : '', pagerCommand, text], { stdio: 'inherit' })
+    let args = [pagerCommand, text]
+    if (isWin) 
+      args = ['-File', ...args]
+    spawnSync(SHELL, args, { stdio: 'inherit' })
 
     setTimeout(() => {
       process.stdout.write(ansiEscapes.cursorTo(pos.col - 1, pos.row - 1))
