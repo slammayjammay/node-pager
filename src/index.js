@@ -17,11 +17,11 @@ const PAGER_COMMAND_LOC = '../helpers/pager' + (isWin ? '.ps1' : '')
  */
 const pager = (text) => {
   return new Promise((resolve) => {
-    let pos = getCursorPosition.sync()
+    const pos = getCursorPosition.sync()
     process.stdout.write(ansiEscapes.cursorTo(0, 0))
 
-    let pagerCommand = join(__dirname, PAGER_COMMAND_LOC)
-    spawnSync(SHELL, [pagerCommand, text], { stdio: 'inherit' })
+    const pagerCommand = join(__dirname, PAGER_COMMAND_LOC)
+    spawnSync(SHELL, [isWin ? '-File' : '', pagerCommand, text], { stdio: 'inherit' })
 
     setTimeout(() => {
       process.stdout.write(ansiEscapes.cursorTo(pos.col - 1, pos.row - 1))
