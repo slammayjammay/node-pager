@@ -3,7 +3,9 @@ const spawnSync = require('child_process').spawnSync
 const ansiEscapes = require('ansi-escapes')
 const getCursorPosition = require('@patrickkettner/get-cursor-position')
 
-const PAGER_COMMAND_LOC = '../helpers/pager'
+const isWin = process.platform === 'win32'
+const SHELL = isWin ? 'powershell' : '/bin/bash'
+const PAGER_COMMAND_LOC = '../helpers/pager' + (isWin ? '.ps1' : '')
 
 /**
  * Output the given text into a pager (less). First move the cursor to the top
@@ -14,20 +16,23 @@ const PAGER_COMMAND_LOC = '../helpers/pager'
  * @return {promise}
  */
 const pager = (text) => {
-	return new Promise((resolve) => {
-		let pos = getCursorPosition.sync()
-		process.stdout.write(ansiEscapes.cursorTo(0, 0))
+  return new Promise((resolve) => {
+    const pos = getCursorPosition.sync()
+    process.stdout.write(ansiEscapes.cursorTo(0, 0))
 
-		let pagerCommand = join(__dirname, PAGER_COMMAND_LOC)
-		spawnSync(pagerCommand, [text], { stdio: 'inherit' })
+    const pagerCommand = join(__dirname, PAGER_COMMAND_LOC)
+    let args = [pagerCommand, text]
+    if (isWin) 
+      args = ['-File', ...args]
+    spawnSync(SHELL, args, { stdio: 'inherit' })
 
-		setTimeout(() => {
-			process.stdout.write(ansiEscapes.cursorTo(pos.col - 1, pos.row - 1))
+    setTimeout(() => {
+      process.stdout.write(ansiEscapes.cursorTo(pos.col - 1, pos.row - 1))
 
-			// I think this works? resolve seems to execute only after the pager is exited.
-			resolve()
-		}, 0)
-	})
+      // I think this works? resolve seems to execute only after the pager is exited.
+      resolve()
+    }, 0)
+  })
 }
 
 module.exports = pager
