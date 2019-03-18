@@ -1,5 +1,5 @@
 # `node-pager`
-> A super simple module that outputs text into a pager.
+> A super simple module that outputs text into `less`.
 
 # Usage
 Install
