@@ -9,14 +9,16 @@ function windows(string) {
 }
 
 module.exports = string => {
-	return new Promise(resolve => {
+	return new Promise((resolve, reject) => {
 		if (process.platform === 'win32') {
 			windows(string);
 			return resolve();
 		}
 
 		tmp.file((err, path, fd, cleanupCb) => {
-			if (err) throw err;
+			if (err) {
+				return reject(err);
+			}
 
 			writeSync(fd, string);
 			spawnSync(`less -R "${path}"`, { shell: true, stdio: 'inherit' });
