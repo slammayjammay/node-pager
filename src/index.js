@@ -8,7 +8,7 @@ function windows(string) {
 	spawnSync('powershell', ['-File', file, string], { stdio: 'inherit' });
 }
 
-module.exports = string => {
+module.exports = (string, options = '-R') => {
 	return new Promise((resolve, reject) => {
 		if (process.platform === 'win32') {
 			windows(string);
@@ -21,7 +21,7 @@ module.exports = string => {
 			}
 
 			writeSync(fd, string);
-			spawnSync(`less -R "${path}"`, { shell: true, stdio: 'inherit' });
+			spawnSync(`less ${options} "${path}"`, { shell: true, stdio: 'inherit' });
 
 			cleanupCb();
 			resolve();
