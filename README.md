@@ -19,3 +19,10 @@ fs.readFile('somefile.txt', (err, data) => {
   })
 })
 ```
+
+You can specify options to be passed to `less` (only if your platform is not windows).
+
+```js
+pager('my string', '-F'); // less -F
+pager('my string'); // by default less -R (allows colors)
+```
