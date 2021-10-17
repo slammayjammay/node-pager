@@ -2,7 +2,7 @@
   "name": "node-pager",
   "version": "0.3.4",
   "description": "A super simple module that outputs text into a pager.",
-  "main": "src/index.js",
+  "main": "index.js",
   "keywords": [
     "node",
     "pager",
