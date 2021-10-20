@@ -1,5 +1,4 @@
 const { writeSync } = require('fs');
-const { join } = require('path');
 const { spawnSync } = require('child_process');
 const tmp = require('tmp');
 
